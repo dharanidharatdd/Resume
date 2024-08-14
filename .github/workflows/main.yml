@@ -1,0 +1,34 @@
+name: Sync Resume
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
+
+jobs:
+  copy-resume:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Resume repository
+      uses: actions/checkout@v2
+
+    - name: Clone Portfolio repository
+      run: git clone https://github.com/dharanidharatdd/dharanidharatdd.github.io.git
+
+    - name: Remove existing symlink or file
+      run: rm -f dharanidharatdd.github.io/assets/resume/resume.pdf
+
+    - name: Copy resume to Portfolio repository
+      run: cp dharanidhara_resume.pdf dharanidharatdd.github.io/assets/resume/resume.pdf
+
+    - name: Commit changes
+      run: |
+        cd dharanidharatdd.github.io
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add assets/resume/resume.pdf
+        git commit -m 'Update resume'
+        git push
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
