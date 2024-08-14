@@ -13,10 +13,17 @@ jobs:
     - name: Checkout Resume repository
       uses: actions/checkout@v2
 
+    - name: Clone Portfolio repository
+      run: git clone https://github.com/dharanidharatdd/dharanidharatdd.github.io.git
+
+    - name: Remove existing symlink or file
+      run: rm -f dharanidharatdd.github.io/assets/resume/resume.pdf
+
     - name: Copy resume to Portfolio repository
+      run: cp dharanidhara_resume.pdf dharanidharatdd.github.io/assets/resume/resume.pdf
+
+    - name: Commit changes
       run: |
-        git clone https://github.com/dharanidharatdd/dharanidharatdd.github.io.git
-        cp dharanidhara_resume.pdf dharanidharatdd.github.io/assets/resume/resume.pdf
         cd dharanidharatdd.github.io
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
