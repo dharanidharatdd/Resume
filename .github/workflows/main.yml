@@ -29,6 +29,6 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add assets/resume/resume.pdf
         git commit -m 'Update resume'
-        git push https://github-actions:${{ secrets.GH_PAT }}@github.com/dharanidharatdd/dharanidharatdd.github.io.git
+        git push https://${{ secrets.GH_PAT }}@github.com/dharanidharatdd/dharanidharatdd.github.io.git
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
